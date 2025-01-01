@@ -1,0 +1,178 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+search: false
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+@media (min-width: 80em) {
+    html {
+        font-size:16px
+    }
+}
+
+
+
+
+/* Tooltip from https://www.w3schools.com/css/css_tooltip.asp */
+.jekyll-glossary {
+  position: relative;
+  display: inline-block;
+  border-bottom: 2px dotted #0074bd;
+  cursor: help;
+}
+
+.jekyll-glossary .jekyll-glossary-tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  font-size: 0.75em;
+  padding: 5px;
+  border-radius: 6px;
+
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+
+  width: 200px;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -80px; /* Use half of the width to center the tooltip */
+
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.jekyll-glossary:hover .jekyll-glossary-tooltip {
+  visibility: visible;
+}
+
+/* Style the source link (if there is one provided in the glossary entry). */
+.jekyll-glossary-source-link:before {
+  content: "[source]";  // "(reference)", "<link>" or whatever you want.
+}
+
+/* Arrow created with borders. */
+.jekyll-glossary .jekyll-glossary-tooltip::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+/* Animation from invisible to visible on hover. */
+.jekyll-glossary .jekyll-glossary-tooltip {
+  opacity: 0;
+  transition: opacity 1s;
+}
+.jekyll-glossary:hover .jekyll-glossary-tooltip {
+  opacity: 1;
+}
+
+form {
+    background-color: mintcream;
+}
+
+.archive__subtitle {
+font-size: 1.5em;}
+
+.archive__item-title {
+font-size: 1em;
+}
+
+.nav__list .nav__items {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+
+
+/* to add submenu to main menu - done by Hari */
+
+/* Dropdown menu styles for main navigation */
+.masthead__menu-item {
+  position: relative;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 1001;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-toggle::after {
+  content: ' ▼';
+  font-size: 0.7em;
+  margin-left: 5px;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  min-width: 250px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+  z-index: 1002;
+  padding: 10px 0;
+}
+
+.dropdown.active .dropdown-menu {
+  display: block !important;
+}
+
+.dropdown-menu li {
+  padding: 5px 0;
+}
+
+.dropdown-menu li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+  padding: 5px 15px;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f4f4f4;
+}
+
+/* Ensure main navigation dropdowns are visible */
+.visible-links .dropdown-menu {
+  top: calc(100% + 10px);
+}
+
+/* Ensure dropdown is above other content */
+.masthead__menu {
+  position: relative;
+  z-index: 1000;
+}
+
+.masthead__menu-item {
+  position: static;
+}
+
+/* Debugging styles */
+.dropdown {
+  border: 1px solid rgba(255,0,0,0.2);
+}
+
+.dropdown-menu {
+  border: 1px solid rgba(0,0,255,0.2);
+}
