@@ -14,31 +14,11 @@
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
             <li class="masthead__menu-item">
-              {% if link.children %}
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">
-                    {{ link.title }}
-                    <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    {%- for child in link.children -%}
-                      <li role="presentation">
-                        <a href="{{ child.url | relative_url }}"
-                           role="menuitem"
-                           {% if child.description %} title="{{ child.description }}"{% endif %}
-                           {% if child.target %} target="{{ child.target }}"{% endif %}
-                        >{{ child.title }}</a>
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                </div>
-              {% else %}
-                <a
-                  href="{{ link.url | relative_url }}"
-                  {% if link.description %} title="{{ link.description }}"{% endif %}
-                  {% if link.target %} target="{{ link.target }}"{% endif %}
-                >{{ link.title }}</a>
-              {% endif %}
+              <a
+                href="{{ link.url | relative_url }}"
+                {% if link.description %} title="{{ link.description }}"{% endif %}
+                {% if link.target %} target="{{ link.target }}"{% endif %}
+              >{{ link.title }}</a>
             </li>
           {%- endfor -%}
         </ul>
@@ -57,5 +37,3 @@
     </div>
   </div>
 </div>
-
-<script src="{{ '/assets/js/custom.js' | relative_url }}"></script>

@@ -351,7 +351,7 @@ pagination:
 # Plugins (previously gems:)
 plugins:
   #- jekyll-paginate
-  - jekyll-paginate-v2
+  # - jekyll-paginate-v2
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
@@ -711,7 +711,7 @@ collections:
     permalink: /gk1/:categories/:title/
 
   booksummary:
-    output: false
+    output: true
     permalink: /booksummary1/:categories/:title/
 
   corpus:
@@ -733,14 +733,14 @@ collections:
     permalink: /dscourses1/:categories/:title/
     
   quotations:
-    output: false
+    output: true
     permalink: /quotations1/:categories/:title/
   wiablog:
-    output: false
+    output: true
     permalink: /wiablog1/:categories/:title/
  
   pmblog:
-    output: false
+    output: true
     permalink: /pmblog1/:categories/:title/
   management:
     output: true
@@ -753,7 +753,7 @@ collections:
     permalink: /pmbok6hi1/:categories/:title/
 
   samskrutyatra:
-    output: false
+    output: true
     permalink: /samskrutyatra1/:categories/:title/
     
   gallery:
@@ -761,9 +761,5 @@ collections:
     permalink: /gallery1/:categories/:title/
 
   projects:
-    output: false
+    output: true
     permalink: /projects1/:categories/:title/
-
-# Footer scripts
-footer_scripts:
-  - /assets/js/custom.js
