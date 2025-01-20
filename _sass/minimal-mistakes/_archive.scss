@@ -132,6 +132,75 @@
    Grid view
    ========================================================================== */
 
+.entries-grid {
+  display: grid;
+  grid-template-columns: 1fr;  /* Single column for mobile */
+  grid-gap: 2em;
+  width: 100%;
+  
+  @include breakpoint($medium) {
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablet */
+  }
+
+  @include breakpoint($large) {
+    grid-template-columns: repeat(3, 1fr);  /* 3 columns for laptop/desktop */
+  }
+
+  .grid__item, .list__item, .archive__item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+    .archive__item-teaser {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      position: relative;
+      overflow: hidden;
+      
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .archive__item-title {
+      width: 100%;
+      margin: 0.8em 0;
+      padding: 0;
+      font-size: 1.2em;
+      line-height: 1.4;
+    }
+
+    .archive__item-excerpt {
+      width: 100%;
+      margin: 0.5em 0;
+      padding: 0;
+      font-size: 1em;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+  }
+}
+
+.entries-grid > * {
+  height: 100%;
+}
+
+/* Override any default grid settings */
+@media screen and (max-width: $medium) {
+  .entries-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 .archive {
   .grid__wrapper {
     /* extend grid elements to the right */
@@ -146,51 +215,93 @@
   }
 }
 
-.grid__item {
-  margin-bottom: 2em;
+.grid__wrapper {
+  display: grid;
+  grid-template-columns: 1fr;  /* Single column for mobile */
+  grid-gap: 2em;
+  width: 100%;
+  
+  @include breakpoint($medium) {
+    grid-template-columns: repeat(2, 1fr);  /* 2 columns for tablet */
+  }
 
-  @include breakpoint($small) {
-    float: inline-start;
-    width: span(5 of 10);
+  @include breakpoint($large) {
+    grid-template-columns: repeat(3, 1fr);  /* 3 columns for laptop/desktop */
+  }
 
-    &:nth-child(2n + 1) {
-      clear: both;
-      margin-inline-start: 0;
-    }
+  .grid__item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 
-    &:nth-child(2n + 2) {
-      clear: none;
-      margin-inline-start: gutter(of 10);
+    .archive__item {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+
+      .archive__item-teaser {
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        position: relative;
+        overflow: hidden;
+        margin: 0;
+        
+        img, .teaser__image {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .archive__item-content {
+        flex-grow: 1;
+        width: 100%;
+        padding: 1em 0;
+      }
+
+      .archive__item-title {
+        width: 100%;
+        margin: 0.5em 0;
+        padding: 0;
+        font-size: 1.2em;
+        line-height: 1.4;
+      }
     }
   }
+}
+
+/* Override any default grid settings */
+@media screen and (max-width: $medium) {
+  .grid__wrapper {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.grid__item, .list__item {
+  width: 100%;
+  float: none;
+  margin: 0;
+  clear: both;
 
   @include breakpoint($medium) {
-    margin-inline: 0; /* override margin*/
-    width: span(3 of 12);
-
-    &:nth-child(2n + 1) {
-      clear: none;
-    }
-
-    &:nth-child(4n + 1) {
-      clear: both;
-    }
-
-    &:nth-child(4n + 2) {
-      clear: none;
-      margin-inline-start: gutter(1 of 12);
-    }
-
-    &:nth-child(4n + 3) {
-      clear: none;
-      margin-inline-start: gutter(1 of 12);
-    }
-
-    &:nth-child(4n + 4) {
-      clear: none;
-      margin-inline-start: gutter(1 of 12);
-    }
+    float: none;
+    width: 100%;
+    margin: 0;
   }
+}
+
+.grid__item {
+  margin-bottom: 2em;
 
   .page__meta {
     margin: 0 0 4px;
@@ -238,6 +349,13 @@
   @include clearfix();
   margin-bottom: 2em;
   border-bottom: 1px solid $border-color;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2em;
+
+  @include breakpoint($medium) {
+    display: block;
+  }
 
   .archive__item-title {
     margin-bottom: 0;
@@ -246,10 +364,11 @@
 
 .feature__item {
   position: relative;
-  margin-bottom: 2em;
   font-size: 1.125em;
+  width: 100%;
+  margin: 0;
 
-  @include breakpoint($small) {
+  @include breakpoint($medium) {
     float: inline-start;
     margin-bottom: 0;
     width: span(4 of 12);
@@ -268,15 +387,88 @@
       clear: none;
       margin-inline-start: gutter(of 12);
     }
+  }
+}
 
-    .feature__item-teaser {
-      max-height: 200px;
-      overflow: hidden;
-    }
+.feature__item--left, .feature__item--right {
+  position: relative;
+  margin-inline: 0;
+  width: 100%;
+  clear: both;
+  font-size: 1.125em;
+
+  a.btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
   }
 
-  .archive__item-body {
-    padding-inline: gutter(1 of 12);
+  .archive__item-teaser {
+    margin-bottom: 2em;
+  }
+}
+
+.feature__item--left {
+  float: inline-start;
+
+  .archive__item {
+    float: inline-start;
+  }
+
+  @include breakpoint($small) {
+    .archive__item-teaser {
+      float: inline-start;
+      width: span(5 of 12);
+    }
+
+    .archive__item-body {
+      float: inline-end;
+      width: span(7 of 12);
+      padding-inline-start: gutter(0.5 of 12);
+      padding-inline-end: gutter(1 of 12);
+    }
+  }
+}
+
+.feature__item--right {
+  float: inline-end;
+
+  .archive__item {
+    float: inline-end;
+  }
+
+  @include breakpoint($small) {
+    text-align: end;
+
+    .archive__item-teaser {
+      float: inline-end;
+      width: span(5 of 12);
+    }
+
+    .archive__item-body {
+      float: inline-start;
+      width: span(7 of 12);
+      padding-inline-start: gutter(1 of 12);
+      padding-inline-end: gutter(0.5 of 12);
+    }
+  }
+}
+
+.feature__item--center {
+  position: relative;
+  float: inline-start;
+  margin-inline: 0;
+  width: 100%;
+  clear: both;
+  font-size: 1.125em;
+
+  .archive__item {
+    float: inline-start;
+    width: 100%;
+  }
+
+  .archive__item-teaser {
+    margin-bottom: 2em;
   }
 
   a.btn::before {
@@ -285,105 +477,17 @@
     inset: 0;
   }
 
-  &--left, &--right {
-    position: relative;
-    margin-inline: 0;
-    width: 100%;
-    clear: both;
-    font-size: 1.125em;
-
-    a.btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
+  @include breakpoint($small) {
+    text-align: center;
 
     .archive__item-teaser {
-      margin-bottom: 2em;
-    }
-  }
-
-  &--left {
-    float: inline-start;
-
-    .archive__item {
-      float: inline-start;
+      margin: 0 auto;
+      width: span(5 of 12);
     }
 
-    @include breakpoint($small) {
-      .archive__item-teaser {
-        float: inline-start;
-        width: span(5 of 12);
-      }
-
-      .archive__item-body {
-        float: inline-end;
-        width: span(7 of 12);
-        padding-inline-start: gutter(0.5 of 12);
-        padding-inline-end: gutter(1 of 12);
-      }
-    }
-  }
-
-  &--right {
-    float: inline-end;
-
-    .archive__item {
-      float: inline-end;
-    }
-
-    @include breakpoint($small) {
-      text-align: end;
-
-      .archive__item-teaser {
-        float: inline-end;
-        width: span(5 of 12);
-      }
-
-      .archive__item-body {
-        float: inline-start;
-        width: span(7 of 12);
-        padding-inline-start: gutter(1 of 12);
-        padding-inline-end: gutter(0.5 of 12);
-      }
-    }
-  }
-
-  &--center {
-    position: relative;
-    float: inline-start;
-    margin-inline: 0;
-    width: 100%;
-    clear: both;
-    font-size: 1.125em;
-
-    .archive__item {
-      float: inline-start;
-      width: 100%;
-    }
-
-    .archive__item-teaser {
-      margin-bottom: 2em;
-    }
-
-    a.btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-    }
-
-    @include breakpoint($small) {
-      text-align: center;
-
-      .archive__item-teaser {
-        margin: 0 auto;
-        width: span(5 of 12);
-      }
-
-      .archive__item-body {
-        margin: 0 auto;
-        width: span(7 of 12);
-      }
+    .archive__item-body {
+      margin: 0 auto;
+      width: span(7 of 12);
     }
   }
 }
@@ -425,7 +529,13 @@
 /* Place inside a single layout */
 
 .layout--single {
-	.feature__wrapper {
-		display: inline-block;
-	}
+  .feature__wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2em;
+
+    @include breakpoint($medium) {
+      display: block;
+    }
+  }
 }
