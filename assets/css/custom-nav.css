@@ -380,3 +380,23 @@
     transform: rotate(45deg);
     bottom: 0;
 }
+
+/* Mermaid Diagram Styles */
+.mermaid {
+  text-align: center;
+  margin: 2em 0;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Ensure diagram is responsive */
+@media screen and (max-width: 768px) {
+  .mermaid {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
