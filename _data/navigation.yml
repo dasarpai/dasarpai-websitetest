@@ -227,7 +227,25 @@ docs:
         url: "/samskrutyatra-tags#chanting"  
 
 
-# sidebar navigation for PMLOGY
+# footer navigation
+resources1:
+    - title: "DS Resources"
+      url: "/datascience-tags#ds-resources"       
+    - title: "Data Science-Books"
+      url: "/dsblog/ds-ai-ml-books"
+    - title: "Data Science Cheatsheets"
+      url: "/dsblog/data-science-cheatsheets"   
+    - title: "Video Channels to Learn DS"
+      url: "/dsblog/best-youtube-channels-for-ds"
+    - title: "DS Interview Questions"  
+      url: "/dsblog/ds-ai-ml-interview-resources"
+    - title: "PMBOK6 Templates"
+      url: "/pmi-templates"
+    - title: "PRINCE2 Templates"
+      url: "/prince2-templates"
+    - title: "Microsoft PM Templates"
+      url: "/microsoft-pm-templates"
+
 gallary1:
     - title: "Online AI Classes 1"
       url: "/slider-online-sessions1"
@@ -241,8 +259,6 @@ gallary1:
       url: "/slider-pm-selected-photos" 
     - title: "PM & DS Workshop Photos"
       url: "/slider-pm-workshops"
-    - title: "My Photos"
-      url: "/slider-my-photos"
       
 blogs1:
     - title: "Data Science Blog"
@@ -271,6 +287,10 @@ footer1:
       url: "/dscourses"   
     - title: "My Project/Work Catalog"
       url: "/project-index-page" 
+    - title: "Clients"
+      url: "/clients"
+    - title: "Testimonial"
+      url: "/testimonials"
     - label: "Terms & Condition"
       icon: "fas fa-fw fa-file-contract"
       url: "/terms-of-service"
