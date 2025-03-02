@@ -84,6 +84,7 @@ google:
   search_engine_id       : # YOUR_SEARCH_ENGINE_ID
   instant_search         : # false (default), true
 # SEO Related
+algolia-site-verification:  456D272E443DB693
 google_site_verification : google926354b0a3e2593e.html
 bing_site_verification   :
 naver_site_verification  :
@@ -139,17 +140,10 @@ author:
       icon: "fab fa-solid fa-link"
       url: "https://dasarpai.com"
       
-    - label: "Gmail"
-      icon: "fab fa-fw fa-google"
-      url: "mailto:hari.thapliyal@gmail.com"
-      
     - label: "Email"
       icon: "fab fa-solid fa-envelope"
       url: "mailto:hari@dasarpai.com"
-      
-    - label: "StackOverflow"
-      icon: "fab fa-stack-overflow"
-      url: "https://stackoverflow.com/users/10903618/hari-thapliyal"
+
        
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
@@ -159,9 +153,6 @@ author:
       icon: "fab fa-fw fa-orcid"
       url: "https://orcid.org/0000-0001-7907-865X"
       
-    - label: "ResearchGate"
-      icon: "fab fa-fw fa-researchgate"
-      url: "https://www.researchgate.net/profile/hari-thapliyal"
       
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
@@ -224,7 +215,7 @@ include:
   - _pmbok6hi 
   - _pmblog 
   - _quotations
-  - _wiablog 
+  - _wiapost 
   - _management
   - _samskrut
   - _dscourses
@@ -329,12 +320,20 @@ pagination:
         per_page: 10
         permalink: '/page/:num/'
         title: ':title - page :num'
-    wiablog:  
-        collection: 'wiablog'
+    wiapost:  
+        collection: 'wiapost'
         per_page: 10
         permalink: '/page/:num/'
         title: ':title - page :num'
  
+
+feed:
+  collections:
+    - dsblog
+    - booksummary
+    - samskrutyatra
+    - pmblog
+    - wiapost
 
 
 # Plugins (previously gems:)
@@ -563,10 +562,10 @@ defaults:
       sidebar:
         nav: "docs"  
       
-  # _wiablog
+  # _wiapost
   - scope:
-      path: "_wiablog"
-      type: wiablog
+      path: "_wiapost"
+      type: wiapost
     values:
       layout: wiapost-layout
       author_profile: true
@@ -724,9 +723,9 @@ collections:
   quotations:
     output: true
     permalink: /quotations1/:categories/:title/
-  wiablog:
+  wiapost:
     output: true
-    permalink: /wiablog1/:categories/:title/
+    permalink: /wiapost1/:categories/:title/
  
   pmblog:
     output: true

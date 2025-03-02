@@ -1,95 +1,84 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('.greedy-nav');
-    const burgerToggle = nav.querySelector('.greedy-nav__toggle');
-    const visibleLinks = nav.querySelector('.visible-links');
-    
-    // Toggle burger menu
-    burgerToggle.addEventListener('click', function(e) {
-        e.preventDefault();
-        nav.classList.toggle('show-links');
-        this.classList.toggle('close');
-    });
+    // --- Dropdown Menu Handling ---
 
-    // Handle menu toggles
+    // Function to close all dropdowns
+    function closeAllDropdowns() {
+        document.querySelectorAll('.masthead__menu-item.has-dropdown.active, .dropdown-toggle.active').forEach(el => {
+            el.classList.remove('active');
+        });
+    }
+
+    // Handle click events on dropdown toggles
     document.addEventListener('click', function(e) {
-        // Close burger menu when clicking outside
-        if (!nav.contains(e.target)) {
-            nav.classList.remove('show-links');
-            burgerToggle.classList.remove('close');
-            // Close all submenus
-            document.querySelectorAll('.submenu, .submenu-child').forEach(menu => {
-                menu.classList.remove('show');
-            });
-            document.querySelectorAll('.menu-toggle, .submenu-toggle').forEach(toggle => {
-                toggle.classList.remove('active');
-            });
-        }
+        const toggle = e.target.closest('.dropdown-toggle');
+        if (toggle) {
+            e.preventDefault();
+            e.stopPropagation();
 
-        // Handle menu toggle clicks
-        if (e.target.closest('.menu-toggle')) {
-            const menuToggle = e.target.closest('.menu-toggle');
-            const submenu = menuToggle.nextElementSibling;
-            
-            // If on mobile, prevent immediate parent link navigation
-            if (window.innerWidth <= 768) {
-                e.preventDefault();
-                
-                // Close sibling menus
-                const parentUl = menuToggle.closest('ul');
-                parentUl.querySelectorAll('.menu-toggle').forEach(toggle => {
-                    if (toggle !== menuToggle) {
-                        toggle.classList.remove('active');
-                        const siblingMenu = toggle.nextElementSibling;
-                        if (siblingMenu) siblingMenu.classList.remove('show');
+            const parentLi = toggle.closest('li');
+            const parentUl = parentLi.closest('ul');
+
+            // If clicking on a different dropdown at the same level, close others
+            if (!parentLi.classList.contains('active')) {
+                parentUl.querySelectorAll('li.active').forEach(li => {
+                    if (li !== parentLi) {
+                        li.classList.remove('active');
+                        li.querySelectorAll('.active').forEach(active => {
+                            active.classList.remove('active');
+                        });
                     }
                 });
+            }
 
-                // Toggle current menu
-                menuToggle.classList.toggle('active');
-                if (submenu) submenu.classList.toggle('show');
+            // Toggle current dropdown
+            parentLi.classList.toggle('active');
+            toggle.classList.toggle('active');
+        } else if (!e.target.closest('.masthead__menu-item')) {
+            // Close all dropdowns when clicking outside
+            closeAllDropdowns();
+        }
+    });
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        const toggle = document.activeElement.closest('.dropdown-toggle');
+        if (toggle) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggle.click();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                closeAllDropdowns();
+            }
+        }
+    });
+
+    // --- Back-to-Top Button Handling ---
+
+    const backToTopButton = document.getElementById('pst-back-to-top');
+
+    if (backToTopButton) {
+        // Function to show/hide the button based on scroll position
+        function toggleBackToTopButton() {
+            if (window.scrollY > 300) { // Show button after scrolling 300px (adjust as needed)
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
             }
         }
 
-        // Handle submenu toggle clicks
-        if (e.target.closest('.submenu-toggle')) {
-            const submenuToggle = e.target.closest('.submenu-toggle');
-            const submenuChild = submenuToggle.nextElementSibling;
-            
-            // Always prevent navigation for submenu toggles
-            e.preventDefault();
-            
-            // Close sibling submenus
-            const parentUl = submenuToggle.closest('ul');
-            parentUl.querySelectorAll('.submenu-toggle').forEach(toggle => {
-                if (toggle !== submenuToggle) {
-                    toggle.classList.remove('active');
-                    const siblingMenu = toggle.nextElementSibling;
-                    if (siblingMenu) siblingMenu.classList.remove('show');
-                }
+        // Function to scroll to the top smoothly
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-
-            // Toggle current submenu
-            submenuToggle.classList.toggle('active');
-            if (submenuChild) submenuChild.classList.toggle('show');
         }
-    });
 
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            if (window.innerWidth > 768) {
-                // Reset mobile menu state on desktop
-                nav.classList.remove('show-links');
-                burgerToggle.classList.remove('close');
-                document.querySelectorAll('.submenu, .submenu-child').forEach(menu => {
-                    menu.classList.remove('show');
-                });
-                document.querySelectorAll('.menu-toggle, .submenu-toggle').forEach(toggle => {
-                    toggle.classList.remove('active');
-                });
-            }
-        }, 250);
-    });
+        // Event listener for scroll events
+        window.addEventListener('scroll', toggleBackToTopButton);
+
+        // Event listener for button click
+        backToTopButton.addEventListener('click', scrollToTop);
+    }
 });
