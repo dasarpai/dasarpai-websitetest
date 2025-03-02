@@ -80,5 +80,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Event listener for button click
         backToTopButton.addEventListener('click', scrollToTop);
+
+        // Event listener for button touchstart
+        backToTopButton.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Prevent default action
+            scrollToTop();
+        }, { passive: true });
     }
 });
