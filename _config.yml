@@ -330,10 +330,11 @@ pagination:
 feed:
   collections:
     - dsblog
+    - wiapost
     - booksummary
     - samskrutyatra
     - pmblog
-    - wiapost
+
 
 
 # Plugins (previously gems:)
