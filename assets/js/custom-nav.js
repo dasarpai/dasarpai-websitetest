@@ -87,4 +87,60 @@ document.addEventListener('DOMContentLoaded', function() {
             scrollToTop();
         }, { passive: true });
     }
+
+
+    /* side menu social button */
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const socialIcons = document.querySelector('.social-icons');
+
+    if (!toggleBtn) {
+        console.error('Toggle button not found');
+        return;
+    }
+    if (!socialIcons) {
+        console.error('Social icons not found');
+        return;
+    }
+
+    function toggleDropdown(e) {
+        console.log('Button clicked');
+        // Removed e.stopPropagation() to test link behavior
+
+        if (socialIcons.classList.contains('visible')) {
+            console.log('Hiding menu');
+            socialIcons.classList.remove('visible');
+        } else {
+            console.log('Showing menu');
+            socialIcons.classList.add('visible');
+        }
+    }
+
+    // Clear existing listeners
+    toggleBtn.removeEventListener('click', toggleDropdown);
+    toggleBtn.removeEventListener('touchstart', toggleDropdown);
+
+    // Add listeners
+    toggleBtn.addEventListener('click', toggleDropdown);
+    toggleBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
+
+    // Close on outside click
+    document.addEventListener('click', function(event) {
+        if (!toggleBtn.contains(event.target) && !socialIcons.contains(event.target)) {
+            console.log('Clicked outside, hiding menu');
+            socialIcons.classList.remove('visible');
+        }
+    });
+
+    // Debug link clicks
+    const links = socialIcons.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('Link clicked:', this.href);
+            // Ensure navigation happens
+        });
+    });
+
+    console.log('Script initialized successfully');
+
 });
+
