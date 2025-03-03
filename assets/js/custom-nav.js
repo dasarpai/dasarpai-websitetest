@@ -92,6 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     /* side menu social button */
     const toggleBtn = document.querySelector('.toggle-btn');
     const socialIcons = document.querySelector('.social-icons');
+    if (socialIcons) {
+        socialIcons.classList.toggle('visible');
+    }
 
     if (!toggleBtn) {
         console.error('Toggle button not found');
@@ -104,24 +107,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function toggleDropdown(e) {
         console.log('Button clicked');
-        // Removed e.stopPropagation() to test link behavior
 
-        if (socialIcons.classList.contains('visible')) {
-            console.log('Hiding menu');
-            socialIcons.classList.remove('visible');
-        } else {
-            console.log('Showing menu');
-            socialIcons.classList.add('visible');
+        const socialIcons = document.getElementById('social-icons');
+        if (socialIcons) {
+          socialIcons.classList.toggle('visible');
         }
+      
+        const socialIconsContainer = document.querySelector('.social-icons-container');
+        if (socialIconsContainer) {
+          socialIconsContainer.classList.toggle('visible');
+        }
+
+
+
     }
 
     // Clear existing listeners
     toggleBtn.removeEventListener('click', toggleDropdown);
     toggleBtn.removeEventListener('touchstart', toggleDropdown);
 
+
     // Add listeners
     toggleBtn.addEventListener('click', toggleDropdown);
-    toggleBtn.addEventListener('touchstart', toggleDropdown, { passive: false });
+    toggleBtn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    toggleDropdown(e);
+    }, { passive: false });
+
 
     // Close on outside click
     document.addEventListener('click', function(event) {
