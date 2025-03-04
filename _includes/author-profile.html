@@ -1,6 +1,5 @@
 {% assign author = page.author | default: page.authors[0] | default: site.author %}
-{% assign author = site.data.authors[author] | default: author %}
-
+{% assign author = site.data.authors.author1 | default: author %}
 <div>
   <div itemscope itemtype="https://schema.org/Person" class="h-card">
 

@@ -36,6 +36,7 @@ textarea,
 /* Default styles for mobile devices */
 html {
   font-size: 1em !important; /* Adjust this value as needed for mobile */
+  -webkit-text-size-adjust: 160%;
 }
 
 /* Styles for small mobile devices */
