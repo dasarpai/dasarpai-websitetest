@@ -18,6 +18,47 @@ layout: default
   {% endunless %}
 {% endif %}
 
+
+
+{% if page.auto_number_headings %}
+<style>
+  /* Reset all counters at the page content level */
+.page__content {
+  counter-reset: h2counter;
+}
+
+/* For h2 headings */
+.page__content h2:not(.no-count)::before {
+  counter-increment: h2counter;
+  content: counter(h2counter) ". ";
+  /* Reset h3counter for THIS h2 element */
+}
+
+/* Reset h3counter for EACH h2 element */
+.page__content h2:not(.no-count) {
+  counter-reset: h3counter;
+}
+
+/* For h3 headings */
+.page__content h3:not(.no-count)::before {
+  counter-increment: h3counter;
+  content: counter(h2counter) "." counter(h3counter) ". ";
+}
+
+/* Reset h4counter for EACH h3 element */
+.page__content h3:not(.no-count) {
+  counter-reset: h4counter;
+}
+
+/* For h4 headings */
+.page__content h4:not(.no-count)::before {
+  counter-increment: h4counter;
+  content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) ". ";
+}
+</style>
+{% endif %}
+
+
 <div id="main" role="main">
   {% include sidebar.html %}
 
@@ -46,7 +87,9 @@ layout: default
             </nav>
           </aside>
         {% endif %}
-        {{ content }}
+
+      {{ content }}
+
         {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
       
@@ -59,25 +102,8 @@ layout: default
         {% include page__date.html %}
       </footer>
 
-      <div id="disqus_thread"></div>
-      <script>
-          /**
-          *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-          *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-
-          var disqus_config = function () {
-          this.page.url = "{{ page.url | absolute_url }}";  // Use Jekyll's Liquid template to get the absolute URL
-          this.page.identifier = "{{ page.id }}"; // Use Jekyll's Liquid template to get the unique identifier
-          };
-        
-          (function() { // DON'T EDIT BELOW THIS LINE
-          var d = document, s = d.createElement('script');
-          s.src = 'https://dasarpai-com.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-          })();
-      </script>
-      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <!-- Custom Disqus Section -->
+      {% include disqus-custom.html %}
 
 
       <!-- Tags and Categories Section -->
@@ -91,10 +117,9 @@ layout: default
               {% endfor %}
             {% else %}
               <li>No categories</li>
-            {% endif %}
-          </ul>
+            {% endif %}				  
+          </ul>	 
         </div>
-
         <div class="post-tags">
           <h3>Tags:</h3>
           <ul>
@@ -133,16 +158,10 @@ layout: default
       {% include post_pagination.html %}
     </div>
 
-    {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
+    {% if site.environment == 'production' and site.comments.provider and page.comments %}
       {% include comments.html %}
     {% endif %}
 
-
-    
-
-    
-
-    
   </article>
 
   {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
@@ -156,9 +175,6 @@ layout: default
       </div>
     </div>
   {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
-
-
-
 
   {% elsif page.id and page.related %}
     <div class="page__related">

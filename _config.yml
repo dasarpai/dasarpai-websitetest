@@ -15,6 +15,7 @@
 minimal_mistakes_skin    : "sunrise" #"default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", 
 
 # Site Settings
+environment              : production
 long_date_format         : "%-d %B %Y at %H:%M"
 locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
@@ -36,7 +37,7 @@ copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 
 comments:
-  provider               : "disqus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
+  provider               : "giscus" # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "giscus", "custom"
   disqus:
     shortname            : dasarpai-com # https://dasarpai-com.disqus.com/admin/settings/general/ https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -50,31 +51,34 @@ comments:
     theme                : # "github-light" (default), "github-dark"
     issue_term           : # "pathname" (default)
   giscus:
-    repo_id              : # Shown during giscus setup at https://giscus.app
-    category_name        : # Full text name of the category
-    category_id          : # Shown during giscus setup at https://giscus.app
-    discussion_term      : # "pathname" (default), "url", "title", "og:title"
-    reactions_enabled    : # '1' for enabled (default), '0' for disabled
-    theme                : # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
-    strict               : # 1 for enabled, 0 for disabled (default)
-    input_position       : # "top", "bottom" # The comment input box will be placed above or below the comments
-    emit_metadata        : # 1 for enabled, 0 for disabled (default) # https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#imetadatamessage
-    lang                 : # "en" (default)
-    lazy                 : # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
+    repo                 : "dasarpai/dasarpai-comments"
+    repo_id              : "R_kgDOOGVFpA"  # Shown during giscus setup at https://giscus.app
+    category_name        : "General" # Full text name of the category
+    category_id          : "DIC_kwDOOGVFpM4CnzHR" # Shown during giscus setup at https://giscus.app
+    discussion_term      : "url" # "pathname" (default), "url", "title", "og:title"
+    reactions_enabled    : 1 # '1' for enabled (default), '0' for disabled
+    theme                : "light" # "light" (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
+    strict               : 1 # 1 for enabled, 0 for disabled (default)
+    input_position       : "top" # "top", "bottom" # The comment input box will be placed above or below the comments
+    emit_metadata        : 1 # 1 for enabled, 0 for disabled (default) # https://github.com/giscus/giscus/blob/main/ADVANCED-USAGE.md#imetadatamessage
+    lang                 : "en" # "en" (default)
+    lazy                 : true # true, false # Loading of the comments will be deferred until the user scrolls near the comments container.
   staticman:
-    branch               : # "master"
-    endpoint             : # "https://{your Staticman v3 API}/v3/entry/github/"
+    repository           : "hari15sep-bots/dasarpai-staticman-elarkk"
+    branch               :  "master"
+    # endpoint             : "https://api.github.com/repos/hari15sep-bots/dasarpai-staticman-elarkk/issues"
+    endpoint             : "https://api.staticman.net/v1/entry"
 reCaptcha:
-  siteKey                : 6LemkdciAAAAAEwIgaytBovM5SUeu7P5bZpFSj8f
-  secret                 : 6LemkdciAAAAAMWQfAabO4iFR1Q0R720dkTfLWu9
+  siteKey                : "6LdiPeoqAAAAAOTg3cRz6p--dU8Kguv2xJPsZzm6"
+  secret                 : "6LdiPeoqAAAAAJHcVj1ASpm0j3x2PUaX2kb1CyeN" 
 atom_feed:
-  path                   : # blank (default) uses feed.xml
-  hide                   : # true, false (default)
+  path                   : all/feed.xml # blank (default) uses feed.xml
+  hide                   : true # true, false (default)
 search                   : true # true, false (default)
 search_full_content      : true # true, false (default)
 search_provider          : lunr # lunr (default), algolia, google
 lunr:
-  search_within_pages    : # true, false (default)
+  search_within_pages    : true # true, false (default)
 algolia:
   application_id         : # YOUR_APPLICATION_ID
   index_name             : # YOUR_INDEX_NAME
@@ -102,7 +106,7 @@ og_image                 : "/assets/images/site-logo.jpg" # Open Graph/Twitter d
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
+  type                   : Person # Person or Organization (defaults to Person)
   name                   : # If the user or organization name differs from the site's name
   links: # An array of links to social media profiles
 
@@ -281,6 +285,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+  math_engine: mathjax 
 
 
 # Sass/SCSS
