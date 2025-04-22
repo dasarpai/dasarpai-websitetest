@@ -1,1 +1,0 @@
-Navigating-Ruby-Ecosystem
